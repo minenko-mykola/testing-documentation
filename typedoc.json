@@ -8,5 +8,5 @@
   "excludeExternals": true,
   "tsconfig": "./tsconfig.json",
 
-  "baseUrl": "./"
+  "basePath": "./"
 }
