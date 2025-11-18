@@ -7,6 +7,11 @@
   "excludeProtected": false,
   "excludeExternals": true,
   "tsconfig": "./tsconfig.json",
-
-  "basePath": "/testing-documentation/"
+  "theme": "default",
+  "includeSearch": true,
+  "hideGenerator": false,
+  "excludeConstructors": false,
+  "gitRevision": "master",
+  "githubPages": true,
+  "readme": "README.md"
 }

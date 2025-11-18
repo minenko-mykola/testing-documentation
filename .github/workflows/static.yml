@@ -1,0 +1,72 @@
+# Simple workflow for deploying TypeDoc documentation to Pages
+name: 📄 TypeDoc Docs Deployment (Official Pages Method)
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build_and_deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v4
+
+      # 1. Налаштування середовища Node.js
+      - name: ⚙️ Setup Node.js and Cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # 2. Генерація документації TypeDoc
+      - name: 📝 Generate TypeDoc documentation
+        # Припускаємо, що TypeDoc налаштований на вивід у папку './docs'
+        run: npx typedoc
+
+      
+      # 3. Налаштування та завантаження артефакту (Ваш спосіб деплою)
+      - name: 🔧 Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: ⬆️ Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Завантажуємо папку TypeDoc, яка містить згенеровану документацію
+          path: './docs/'
+
+      # 5. Деплой на GitHub Pages
+      - name: 🌐 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+    needs:
+    with:
+    permissions:
+    name:
+    uses:
+    strategy:
+    if:
+    secrets:
+    concurrency:
