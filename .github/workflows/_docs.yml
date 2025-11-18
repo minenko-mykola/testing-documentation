@@ -1,6 +1,5 @@
 name: Generate Docs
 
-# 5 try
 on:
   push:
     branches:
@@ -32,27 +31,10 @@ jobs:
         # Цей крок генерує документацію у папку 'docs'
         run: npx typedoc
 
-      # 🟢 СТВОРЕННЯ _config.yml для налаштування Jekyll/теми
-      - name: Create Jekyll config file in docs/
-        run: |
-          echo "remote_theme: jekyll/minima" > docs/_config.yml
-          echo "plugins:" >> docs/_config.yml
-          echo "  - jekyll-remote-theme" >> docs/_config.yml
-          echo "Jekyll config file created."        
-
-      # 🟢 ВИПРАВЛЕННЯ ПОМИЛКИ SASS: Створення фіктивного style.scss
-      # Це задовольняє вимогу теми Jekyll, яка очікує цей файл.
-      - name: Create dummy style.scss for Jekyll theme compatibility
-        run: |
-          mkdir -p docs/assets/css
-          echo "---" > docs/assets/css/style.scss
-          echo "---" >> docs/assets/css/style.scss
-          echo "Фіктивний style.scss створено у docs/assets/css/"
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3.9.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # 🟢 Встановлюємо publish_dir на 'docs' (вихідна директорія TypeDoc)
+          # Використовуємо папку TypeDoc напряму, без проміжного _site
           publish_dir: ./docs
           publish_branch: gh-pages
