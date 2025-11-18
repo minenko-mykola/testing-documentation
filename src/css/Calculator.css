@@ -1,0 +1,50 @@
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.buttons button {
+    background-color: #333;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 15px 0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.buttons button:hover {
+    background-color: #555;
+}
+
+.buttons button:active {
+    transform: scale(0.97);
+    background-color: #666;
+}
+
+button.operator {
+    background-color: #ff9500;
+}
+
+button.operator:hover {
+    background-color: #ffa733;
+}
+
+button.equals {
+    background-color: #007aff;
+    grid-column: span 2;
+}
+
+button.equals:hover {
+    background-color: #339bff;
+}
+
+button.clear {
+    background-color: #ff3b30;
+}
+
+button.clear:hover {
+    background-color: #ff5c4d;
+}

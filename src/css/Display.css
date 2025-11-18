@@ -1,0 +1,11 @@
+.display {
+    background-color: #111;
+    color: #0f0;
+    font-size: 2rem;
+    text-align: right;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    min-height: 50px;
+    box-shadow: inset 0 0 5px #000;
+}

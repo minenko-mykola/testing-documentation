@@ -1,0 +1,44 @@
+name: Generate Docs
+
+on:
+  push:
+    branches:
+      - feature/docs-ci # Запускати лише при push до цієї гілки
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Необхідно для peaceiris/actions-gh-pages
+      pages: write # Рекомендовано для сучасного деплою Pages
+      id-token: write # Рекомендовано для сучасного деплою Pages
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Оновлено до v4 для кращої сумісності
+
+      # Крок для кешування залежностей Node.js для швидших збірок
+      - name: Setup Node.js and Cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm' # Кешуємо залежності
+
+      - name: Install dependencies
+        # Використовуйте `npm install` або `npm ci` залежно від вашого lock-файлу
+        run: npm ci
+
+      - name: Generate TypeDoc documentation
+        # Цей крок генерує документацію у папку 'docs' у корені репозиторію
+        run: npx typedoc
+
+      - name: Deploy to GitHub Pages
+        # Використовуємо мирний і надійний екшн для публікації
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 🟢 ВИПРАВЛЕНО: Встановлюємо publish_dir на 'docs'
+          # (це вихідна директорія, створена TypeDoc)
+          publish_dir: ./docs
+          # Рекомендовано: явно вказати гілку для деплою (зазвичай gh-pages або docs)
+          publish_branch: gh-pages
