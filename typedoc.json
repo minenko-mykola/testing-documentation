@@ -8,5 +8,5 @@
   "excludeExternals": true,
   "tsconfig": "./tsconfig.json",
 
-  "basePath": "./"
+  "basePath": "/testing-documentation/"
 }
