@@ -1,4 +1,4 @@
-name: Deploy App and Docs
+name: Deploy Documentation
 
 on:
   push:
@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -26,18 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build React App
-        run: npm run build
-
       - name: Build TypeDoc docs
         run: npm run docs
 
-      - name: Move docs and Create .nojekyll
-        run: |
-          # Перемещаем документацию внутрь папки сборки
-          mv docs build/docs
-          # Создаем файл, чтобы GitHub не игнорировал папки с подчеркиванием (например, assets)
-          touch docs/.nojekyll
+      - name: Prepare .nojekyll
+        run: touch docs/.nojekyll
 
       - name: Deploy to GitHub Pages (gh-pages branch)
         uses: peaceiris/actions-gh-pages@v3

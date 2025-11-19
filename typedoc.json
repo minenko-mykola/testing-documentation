@@ -1,8 +1,6 @@
 {
   "entryPoints": [
-    "src",
-    "src/api",
-    "src/types"
+    "src","src/components","src/logic","src/types"
   ],
   "entryPointStrategy": "expand",
   "out": "docs",
