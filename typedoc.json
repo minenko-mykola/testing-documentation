@@ -1,17 +1,16 @@
 {
-  "entryPoints": ["src"],
+  "entryPoints": [
+    "src",
+    "src/api",
+    "src/types"
+  ],
   "entryPointStrategy": "expand",
   "out": "docs",
-  "includeVersion": true,
   "excludePrivate": true,
-  "excludeProtected": false,
-  "excludeExternals": true,
-  "tsconfig": "./tsconfig.json",
+  "excludeExternals": false,
+  "readme": "none",
   "theme": "default",
-  "includeSearch": true,
-  "hideGenerator": false,
-  "excludeConstructors": false,
-  "gitRevision": "master",
-  "githubPages": true,
-  "readme": "README.md"
+  "tsconfig": "tsconfig.json",
+  "includeVersion": true,
+  "basePath": "."
 }
